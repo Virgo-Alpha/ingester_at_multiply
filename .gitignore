@@ -48,3 +48,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+# other files
+*copy.py
+test.py
