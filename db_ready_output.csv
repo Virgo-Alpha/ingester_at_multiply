@@ -1,5 +1,5 @@
-merchant_product_id,marketplace_product_id,name,max_price_inc_vat
-X3,MQ4,premium shaving foam,26.9
-K7,ML9,regular jelly beans,111.58
-merchant_product_id,marketplace_product_id,name,max_price_inc_vat
-A4,MJ9,None of Your Business,Error: rth
+merchant_product_id,marketplace_product_id,name,max_price_inc_vat,min_price_inc_vat,stock_qty
+A1,MA1,premium shaving foam,35.0,22.7,87
+B2,MB2,regular jelly beans,h12.87,10.69,135
+merchant_product_id,marketplace_product_id,name,max_price_inc_vat,min_price_inc_vat,stock_qty
+C3,MC3,fatty acid vitamins,52.4,4.5,Error: k21

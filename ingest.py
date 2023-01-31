@@ -88,6 +88,7 @@ class MerchantDataFileHandler:
                 for key, value in row.items():
                     try:
                         # transform data
+                        # ! rename value to transformed_value
                         value = self.column_data_transformers[key][0](value)
                     except Exception as e:
                         pass
