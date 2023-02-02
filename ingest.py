@@ -83,14 +83,19 @@ class MerchantDataFileHandler:
             
             for row in reader:
 
+                # ! Don't pop the merchant id from the dictionary, have it in the final output
+
                 row.pop('multiply_merchant_id', None)
 
                 for key, value in row.items():
                     try:
                         # transform data
                         # ! rename value to transformed_value
+                        # ! loop over the transformers
                         value = self.column_data_transformers[key][0](value)
                     except Exception as e:
+                        # ! I think you meant to break here,
+                        # ! otherwise only one transformer will be applied
                         pass
                 
                 # validate data
@@ -102,6 +107,7 @@ class MerchantDataFileHandler:
                         else:
                             # To identify the error, we add the error message 
                             # to the value
+                            # ! No need for the uniqueness since this is a different file now
                             row[key] = "Error: " + value
                             err_rows.append(row)
                             break

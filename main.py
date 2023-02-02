@@ -17,6 +17,8 @@ output_file = 'db_ready_output.csv'
 # file name
 merchant_number = int(merchant_data_file_name.split('_')[0])
 
+# ! Write the out_rows and err_rows in different files; try skipping a line
+
 if __name__ == '__main__':
     mdfh = MerchantDataFileHandler(merchant_number, merchant_data_file_path, 
     column_name_mappings[merchant_number])
