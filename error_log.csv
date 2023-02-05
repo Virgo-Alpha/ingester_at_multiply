@@ -1,2 +1,3 @@
-merchant_product_id,marketplace_product_id,name,max_price_inc_vat
-A4,MJ9,None of Your Business,Error: t4.2
+merchant_product_id,multiply_merchant_id,marketplace_product_id,name,max_price_inc_vat
+X3,276,MQ4,premium shaving foam,f26.9
+A4,276,MJ9,None of Your Business,t4.2

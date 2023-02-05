@@ -31,8 +31,6 @@ if __name__ == '__main__':
             writer.writeheader()
             writer.writerows(out_rows)
 
-            # To separate the error log from the output file, I rewrite the 
-            # headers again
     if out_err:
         with open(error_file, 'w') as errfile:
             fieldnames = out_err[0].keys()

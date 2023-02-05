@@ -21,8 +21,6 @@ def is_positive_number(data):
     return data > 0
 
 # Merchant id is less than 9999
-# ! The line below is rendered useless as I pop the merchant id from the 
-# dictionary first
 def is_valid_merchant_id(data):
     return data < 9999
 
@@ -45,8 +43,6 @@ class MerchantDataFileHandler:
             'min_price_inc_vat': [is_decimal, is_positive_number, ],
             'stock_qty': [is_int_nullable, is_positive_number, ],
             'item_id' : [str, ],
-            # !The line below is rendered useless as I pop the merchant id from 
-            # ! the dictionary first
             'multiply_merchant_id' : [int, is_valid_merchant_id],
         }
 
@@ -58,8 +54,6 @@ class MerchantDataFileHandler:
             # ... other data transformers
             'min_price_inc_vat': [Decimal, ],
             'stock_qty': [int, ],
-            # !The line below is rendered useless as I pop the merchant id from 
-            # ! the dictionary first
             'multiply_merchant_id' : [int, ],
             'item_id' : [str, ],
         }
@@ -67,7 +61,6 @@ class MerchantDataFileHandler:
     def generate_output_file_contents(self):
         # // 1. read input file
         # // 2. validate data
-        # ! For the line below, I think you meant eject?
         # 3. create output contents (inject multiply merchant id here)
         out_rows = []
         err_rows = []
@@ -83,33 +76,30 @@ class MerchantDataFileHandler:
             
             for row in reader:
 
-                # ! Don't pop the merchant id from the dictionary, have it in the final output
-
-                row.pop('multiply_merchant_id', None)
-
                 for key, value in row.items():
                     try:
                         # transform data
                         # ! rename value to transformed_value
                         # ! loop over the transformers
-                        value = self.column_data_transformers[key][0](value)
+                        for transformer in self.column_data_transformers[key]:
+                            transformed_value = transformer(value)
+                            value = transformed_value
+
+                        # transformed_value = self.column_data_transformers[key][0](value)
+                        # value = transformed_value
                     except Exception as e:
                         # ! I think you meant to break here,
                         # ! otherwise only one transformer will be applied
-                        pass
+                        break
                 
                 # validate data
                 try:
                     for validator in self.column_data_validators[key]:
-                        if validator(value):
-                            out_rows.append(row)
+                        if not validator(value):
+                            err_rows.append(row)
                             break
                         else:
-                            # To identify the error, we add the error message 
-                            # to the value
-                            # ! No need for the uniqueness since this is a different file now
-                            row[key] = "Error: " + value
-                            err_rows.append(row)
+                            out_rows.append(row)
                             break
                 except Exception as e:
                             break
