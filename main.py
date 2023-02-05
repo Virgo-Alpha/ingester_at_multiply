@@ -12,12 +12,13 @@ from ingest import MerchantDataFileHandler
 merchant_data_file_name = '276_product_update.csv'
 merchant_data_file_path = os.path.join('.', 'data', merchant_data_file_name)
 output_file = 'db_ready_output.csv'
+error_file = 'error_log.csv'
 
 # I replaced the hard coded merchant number with a dynamic one based on the 
 # file name
 merchant_number = int(merchant_data_file_name.split('_')[0])
 
-# ! Write the out_rows and err_rows in different files; try skipping a line
+# // ! Write the out_rows and err_rows in different files; try skipping a line
 
 if __name__ == '__main__':
     mdfh = MerchantDataFileHandler(merchant_number, merchant_data_file_path, 
@@ -32,11 +33,12 @@ if __name__ == '__main__':
 
             # To separate the error log from the output file, I rewrite the 
             # headers again
-            if out_err:
-                writer.writeheader()
-                writer.writerows(out_err)
-
+    if out_err:
+        with open(error_file, 'w') as errfile:
+            fieldnames = out_err[0].keys()
+            writer = csv.DictWriter(errfile, fieldnames = fieldnames)
+            writer.writeheader()
+            writer.writerows(out_err)
 
 # ? err_rows as an error log section of the file with a reason why/@ least an
 #  indication of the error
-# ! Check log file examples for inspiration
