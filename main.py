@@ -1,6 +1,6 @@
 # Specific instructions
 # 0. This code is written and tested in Python >= 3.6
-# 1. Do not use any libraries that are not part of the python stndard lib
+# 1. Do not use any libraries that are not part of the python standard lib
 # 2. What is given here is a guide, while it is meant to be useful, 
 # you are free to modify any part of it as you wish
 

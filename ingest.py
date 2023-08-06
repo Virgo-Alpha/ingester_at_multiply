@@ -79,8 +79,8 @@ class MerchantDataFileHandler:
                 for key, value in row.items():
                     try:
                         # transform data
-                        # ! rename value to transformed_value
-                        # ! loop over the transformers
+                        # // ! rename value to transformed_value
+                        # // ! loop over the transformers
                         for transformer in self.column_data_transformers[key]:
                             transformed_value = transformer(value)
                             value = transformed_value
@@ -88,8 +88,8 @@ class MerchantDataFileHandler:
                         # transformed_value = self.column_data_transformers[key][0](value)
                         # value = transformed_value
                     except Exception as e:
-                        # ! I think you meant to break here,
-                        # ! otherwise only one transformer will be applied
+                        # // ! I think you meant to break here,
+                        # // ! otherwise only one transformer will be applied
                         break
                 
                 # validate data
